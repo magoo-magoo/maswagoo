@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Swag</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@3.12.1/swagger-ui.css" />
+    <style>
+      /* The side navigation menu */
+      .sidenav {
+        height: 100%; /* 100% Full-height */
+        width: 0; /* 0 width - change this with JavaScript */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #111; /* Black */
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 60px; /* Place content 60px from the top */
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+      }
+
+      /* The navigation menu links */
+      .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+      }
+
+      /* When you mouse over the navigation links, change their color */
+      .sidenav a:hover {
+        color: #f1f1f1;
+      }
+
+      /* Position and style the close button (top right corner) */
+      .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+      }
+
+      /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+      #main {
+        transition: margin-left 0.5s;
+      }
+
+      /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+      @media screen and (max-height: 450px) {
+        .sidenav {
+          padding-top: 15px;
+        }
+        .sidenav a {
+          font-size: 18px;
+        }
+      }
+
+      /* Include the padding and border in an element's total width and height */
+      #myUL * {
+        box-sizing: border-box;
+      }
+
+      /* Remove margins and padding from the list */
+      #myUL ul {
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Style the list items */
+      #myUL ul li {
+        cursor: pointer;
+        position: relative;
+        padding: 12px 8px 12px 40px;
+        background: #eee;
+        font-size: 18px;
+        transition: 0.2s;
+
+        /* make the list items unselectable */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      /* Set all odd list items to a different color (zebra-stripes) */
+       #myUL ul li:nth-child(odd) {
+        background: #f9f9f9;
+      }
+
+      /* Darker background-color on hover */
+      #myUL ul li:hover {
+        background: #ddd;
+      }
+
+      /* When clicked on, add a background color and strike out text */
+      #myUL ul li.checked {
+        background: #888;
+        color: #fff;
+        text-decoration: line-through;
+      }
+
+      /* Add a "checked" mark when clicked on */
+      #myUL ul li.checked::before {
+        content: '';
+        position: absolute;
+        border-color: #fff;
+        border-style: solid;
+        border-width: 0 2px 2px 0;
+        top: 10px;
+        left: 16px;
+        transform: rotate(45deg);
+        height: 15px;
+        width: 7px;
+      }
+
+      /* Style the close button */
+      #myUL .close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 12px 16px 12px 16px;
+      }
+
+      #myUL .close:hover {
+        background-color: #f44336;
+        color: white;
+      }
+
+      /* Style the header */
+      #myUL .header {
+        background-color: #f44336;
+        padding: 30px 40px;
+        color: white;
+        text-align: center;
+      }
+
+      /* Clear floats after the header */
+      #myUL .header:after {
+        content: '';
+        display: table;
+        clear: both;
+      }
+
+      /* Style the input */
+      #myUL input {
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        width: 75%;
+        padding: 10px;
+        float: left;
+        font-size: 16px;
+      }
+
+      /* Style the "Add" button */
+      #myUL .addBtn {
+        padding: 10px;
+        width: 25%;
+        background: #d9d9d9;
+        color: #555;
+        float: left;
+        text-align: center;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+        border-radius: 0;
+      }
+
+      #myUL .addBtn:hover {
+        background-color: #bbb;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <div id="myDIV" class="header">
+        <h2>My To Do List</h2>
+        <input type="text" id="myInput" placeholder="Title..." />
+        <span onclick="newElement()" class="addBtn">Add</span>
+      </div>
+
+      <ul id="myUL">
+        <li>Hit the gym</li>
+        <li class="checked">Pay bills</li>
+        <li>Meet George</li>
+        <li>Buy eggs</li>
+        <li>Read a book</li>
+        <li>Organize office</li>
+      </ul>
+    </div>
+
+    <!-- Use any element to open the sidenav -->
+    <!-- <button onclick="openNav()">Settings</button> -->
+
+    <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+    <div id="main">
+      <div id="swagger-ui"></div>
+    </div>
+  </body>
+  <script src="https://unpkg.com/swagger-ui-dist@3/swagger-ui-standalone-preset.js"></script>
+  <script src="https://unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
+  <script>
+    const openNav = () => {
+      document.getElementById('mySidenav').style.width = '600px'
+      document.getElementById('main').style.marginLeft = '600px'
+    }
+
+    /* Set the width of the side navigation to 0 */
+    const closeNav = () => {
+      document.getElementById('mySidenav').style.width = '0'
+      document.getElementById('main').style.marginLeft = '0'
+    }
+
+    const setup = () => {
+      SwaggerUIBundle({
+        urls: [
+          {
+            url:
+              'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/fe795e257453908f463211c83b38a944daf1aa89/examples/v3.0/uber.yaml',
+            name: 'Uber',
+          },
+          { url: 'https://www.sgmarkets.com/swagger/docs/v2', name: 'SB' },
+          { url: 'http://petstore.swagger.io/v2/swagger.json', name: 'petStore' },
+        ],
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+        plugins: [SwaggerUIBundle.plugins.DownloadUrl],
+        layout: 'StandaloneLayout',
+        showExtensions: true,
+        showCommonExtensions: true,
+        displayOperationId: true,
+        displayRequestDuration: true,
+        filter: true,
+        requestInterceptor: addCustomHeaders,
+      })
+    }
+
+    // retrieve custom headers from storage
+    const customHeaders = () => {
+      const storedValue = localStorage.getItem('custom-headers')
+      if (!storedValue) {
+        localStorage.setItem('custom-headers', JSON.stringify([]))
+        return []
+      }
+      return JSON.parse(storedValue)
+    }
+
+    // Add headers to request
+    const addCustomHeaders = request => {
+      if (request.loadSpec) {
+        return request
+      }
+      const headers = customHeaders()
+      headers.forEach(header => {
+        request.headers[header] = localStorage.getItem(header)
+      })
+      console.log('requestInterceptor', request)
+      return request
+    }
+
+    window.onload = setup
+  </script>
+</html>
